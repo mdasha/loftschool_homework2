@@ -7,16 +7,15 @@
  */
 
 //Задание #1
-function task1($string_array, $one_row = false)
+function task1($stringArray, $oneRow = false)
 {
-    /** @var Количество элементов массива со строками $string_array_length */
-    $string_array_length = count($string_array);
+    $string_array_length = count($stringArray);
     $string = "";
     for ($i = 0; $i < $string_array_length; $i++) {
-        if ($one_row === true) {
-            $string = $string . $string_array[$i] . " ";
+        if ($oneRow === true) {
+            $string = $string . $stringArray[$i] . " ";
         } else {
-            $string = $string . '<p>' . $string_array[$i] . '</p>';
+            $string = $string . '<p>' . $stringArray[$i] . '</p>';
         }
     }
     return $string;
@@ -35,6 +34,9 @@ function task2($numberArray, $math)
     // Проверяем, все ли элементы массива числа. Если $numeric меньше кол-ва элементов массива, то числа - не все.
     // Тогда выводим ошибку. Если все числа, то проверяем второй параметр и проводим вычисления.
     if ($numeric === $numberArrayLength) {
+        $err = 0;
+        $PrintCalculation = [];
+        $result =[];
         for ($i = 1; $i < $numberArrayLength; $i++) {
             $result[0] = $numberArray[0];
             $PrintCalculation[0] = $numberArray[0];
@@ -56,15 +58,14 @@ function task2($numberArray, $math)
                     break;
                 default:
                     $err = 1;
-                    $result[$i] = '<strong>Ошибка!!!</strong> Введите в качестве параметра функции 
-                арифметическую операцию "+", "-", "*" или "/"';
                     break;
             }
         }
         if ($err!=1) {
             $result = $PrintCalculation[$numberArrayLength - 1].'='.$result[$numberArrayLength - 1];
         } else {
-            $result = $result[$numberArrayLength - 1];
+            $result = '<strong>Ошибка!!!</strong> Введите в качестве параметра функции 
+                арифметическую операцию "+", "-", "*" или "/"';
         }
     } else {
         $result = '<strong>Ошибка!!!</strong> Одно или несколько элементов массива 
@@ -88,6 +89,9 @@ function task3()
     // то числа - не все.
     // Тогда выводим ошибку. Если все числа, то проверяем первый элемент массива и проводим вычисления.
     if ($numeric === $countParam - 1) {
+        $err = 0;
+        $PrintCalculation = [];
+        $result =[];
         for ($i = 2; $i < $countParam; $i++) {
             $result[1] = func_get_arg(1);
             $PrintCalculation[1] = func_get_arg(1);
@@ -109,15 +113,14 @@ function task3()
                     break;
                 default:
                     $err = 1;
-                    $result[$i] = '<strong>Ошибка!!!</strong> Введите в качестве параметра функции 
-                арифметическую операцию "+", "-", "*" или "/"';
                     break;
             }
         }
         if ($err!=1) {
             $result = $PrintCalculation[$countParam  - 1].'='.$result[$countParam  - 1];
         } else {
-            $result = $result[$countParam  - 1];
+            $result = '<strong>Ошибка!!!</strong> Введите в качестве параметра функции 
+                арифметическую операцию "+", "-", "*" или "/"';
         }
     } else {
         $result = '<strong>Ошибка!!!</strong> Одно или несколько элементов массива 
@@ -127,7 +130,8 @@ function task3()
 }
 //Задание #4
 //Таблица умножения
-function task4($tab1, $tab2) {
+function task4($tab1, $tab2)
+{
     //Проверяем, введены ли целые числа в качестве аргументов
     $err = '';
     if (!is_int($tab1)) {
@@ -159,49 +163,49 @@ function task5_1($palindrome)
 {
     //Удаляем пробелы во введенной строке
     $pieces = explode(" ", $palindrome);
-    $noBlanksPalyndrome = implode("", $pieces);
+    $noBlanksPalindrome = implode("", $pieces);
 
     //Переводим полученную строку без пробелов в нижний регистр
-    $lowerCasePalyndrome = mb_strtolower($noBlanksPalyndrome);
+    $lowerCasePalindrome = mb_strtolower($noBlanksPalindrome);
 
     //Считаем длину полученной строки
-    $palyndromeLength = mb_strlen($lowerCasePalyndrome);
+    $palindromeLength = mb_strlen($lowerCasePalindrome);
 
     //Считаем половину длины полученной строки, округляем вниз (чтобы не учитывать возможный символ в середине слова)
-    $halfPalyndromeLength = round($palyndromeLength / 2, 0, PHP_ROUND_HALF_DOWN);
+    $halfPalindromeLength = round($palindromeLength / 2, 0, PHP_ROUND_HALF_DOWN);
 
     //Проверяем введенные данные. Если не строка, то выдаем ошибку
     if (!is_string($palindrome)) {
-        echo 'Введите строку в качестве аргумента для проверки на палиндром';
+        $ifPalindrome = 'Введите строку в качестве аргумента для проверки на палиндром';
     } else {
         //Сравниваем значения элементов приведенной строковой переменной: 1-ый символ с последним,
         // 2-ой - с предпоследним и т.д. до половины длины строки. Если символы не совпадают,
         // присваиваем false переменной $result, выходим из цикла. Если совпдают, то $result присваиваем true
         // и продолжаем перебирать символы.
         $result = 0;
-        for ($i = 0; $i < $halfPalyndromeLength; $i++) {
+        for ($i = 0; $i < $halfPalindromeLength; $i++) {
             $j = 2*$i;
-            $leftSymbol[$i] = substr($lowerCasePalyndrome, $j, 2);
-            $rightSymbol[$i] = mb_substr($lowerCasePalyndrome, ($palyndromeLength - 1 - $i), 1);
+            $leftSymbol[$i] = substr($lowerCasePalindrome, $j, 2);
+            $rightSymbol[$i] = mb_substr($lowerCasePalindrome, ($palindromeLength - 1 - $i), 1);
             if ($leftSymbol[$i]===$rightSymbol[$i]) {
                 $result =  $result + 1;
             }
         }
-        if ($result==$halfPalyndromeLength) {
-            $ifPalyndrome = 'true';
+        if ($result==$halfPalindromeLength) {
+            $ifPalindrome = 'true';
         } else {
-            $ifPalyndrome = 'false';
+            $ifPalindrome = 'false';
         }
-        return  $ifPalyndrome;
     }
+    return  $ifPalindrome;
 }
 function task5_2($palindrome)
 {
     if (task5_1($palindrome)==='true') {
         $result = '<br>Введенная строка является палиндромом';
-    } elseif (task5_1($palindrome)==='false') {
+    } else {
         $result = '<br>Введенная строка не является палиндромом';
-}
+    }
     return $result;
 }
 
@@ -226,7 +230,8 @@ function task6()
 }
 //Задание #7
 //Замена и удаление букв
-function task7() {
+function task7()
+{
     $stringKarl = 'Карл у Клары украл Кораллы';
     echo '<ol><li>'.$stringKarl."<br>Удаляем заглавную букву К из фразы, получается:<br><strong>";
     //Длина строки $stringKarl
@@ -240,25 +245,56 @@ function task7() {
         $letter[$i] = $letter[$i].$stringKarlLength[$i + 1];
     }
     echo '</strong></li>';
-    $stringLimonade = 'Две бутылки лимонада';
+    $stringLemonade = 'Две бутылки лимонада';
     //Заменяем в строке слово "Две" на слово "Три"
     $two = 'Две';
     $three = 'Три';
-    $replacement = str_replace($two, $three, $stringLimonade);
-    echo '<li>Исходная строка:'.$stringLimonade.'<br>Заменяется на:<strong> '.$replacement.'</strong>';
+    $replacement = str_replace($two, $three, $stringLemonade);
+    echo '<li>Исходная строка:'.$stringLemonade.'<br>Заменяется на:<strong> '.$replacement.'</strong>';
     echo '</li></ol>';
 }
 
 //Задание #8
 //Регулярные выражения
-
-
+function task8($string)
+{
+    $regexp = '|RX packets:[1-9]([0-9]{3})|';
+    $regexp2 = '|:\)|';
+    $answer = "";
+    //Функция, которая рисует смайлик в ASCII
+    function smile()
+    {
+        $smile = '
+        <pre>
+                                                       ..::\'\'\'\'::..
+                                           .:::.   .;\'\'        ``;.
+   ....                                    :::::  ::    ::  ::    ::
+ ,;\' .;:                ()  ..:            `:::\' ::     ::  ::     ::
+ ::.      ..:,:;.,:;.    .   ::   .::::.    `:\'  :: .:\' ::  :: `:. ::
+  \'\'\'::,   ::  ::  ::  `::   ::  ;:   .::    :   ::  :          :  ::
+,:\';  ::;  ::  ::  ::   ::   ::  ::,::\'\'.    .    :: `:.      .:\' ::
+`:,,,,;;\' ,;; ,;;, ;;, ,;;, ,;;, `:,,,,:\'   :;:    `;..``::::\'\'..;\'
+                                                     ``::,,,,::\'\'                                                  
+        </pre>
+        ';
+        return $smile;
+    };
+    //Если в исходной строке количество переданных RX пакетов более 1000, то выводим сообщение "Сеть есть"
+    if (preg_match($regexp, $string)) {
+        $answer = 'Сеть есть';
+    }
+    //Если в исходной строке есть :), то рисуем смайлик в ASCII, а сообщение "Сеть есть" не выводим
+    if (preg_match($regexp2, $string)) {
+        $answer = smile();
+    }
+        return $answer;
+}
 
 //Задание #9
 //Вывод содержимого файла на экран
-function task9 ($file)
+function task9($file)
 {
-    $openedFile = fopen($file, r);
+    $openedFile = fopen($file, 'r');
     $fileContent = fread($openedFile, 100);
     return $fileContent;
 }
@@ -268,10 +304,10 @@ function task9 ($file)
 function task10($file)
 {
     touch($file);
-    $openedFile = fopen($file, w);
+    $openedFile = fopen($file, 'w');
     fwrite($openedFile, 'Hello again!');
 
-    $openedFile2 = fopen($file, r);
+    $openedFile2 = fopen($file, 'r');
     $fileContent = 'Создан файл: '.$file.'<br>С содержимым: '.fread($openedFile2, 100);
     return $fileContent;
 }
